@@ -1,13 +1,23 @@
-
 class Rotation {
-  constructor() { this.totalAngle = 0; this.angularVelocity = 0; this.initialFacing = 0; }
-  update(dt) {
-    // BUG: 只看最终朝向
-    this.totalAngle = this.angularVelocity * dt;
+  constructor() {
+    this.totalAngle = 0;
+    this.angularVelocity = 0;
+    this.facing = 0;
   }
+
+  update(dt) {
+    this.totalAngle += this.angularVelocity * dt;
+    this.facing += this.angularVelocity * dt;
+  }
+
   getTotalRotation() {
-    // BUG: 用最终朝向减初始朝向
     return this.totalAngle;
+  }
+
+  getDirection() {
+    if (this.totalAngle > 0) return 'cw';
+    if (this.totalAngle < 0) return 'ccw';
+    return 'none';
   }
 }
 
